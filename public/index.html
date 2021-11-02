@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="./lib/cesium/css/widgets.css"/>
+    <!-- <link rel="stylesheet" href="./static/widgets.css"/> -->
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <!-- <script type="text/javascript" src="./static/Cesium.js"></script> -->
+    <script type="text/javascript" src="./Cesium/Cesium.js"></script>
+    <!-- cesium白膜建筑加上泛光特效 -->
+    <script type="text/javascript"  src="./Cesium/cesium-tilesetEffect.js"></script>
+    <!-- cesium添加自定义材质（动态纹理） -->
+    <script type="text/javascript" src="./Cesium/PolylineTrailLinkMaterialProperty.js"></script>
+    <!-- cesium添加道路流光轨迹 -->
+    <script type="text/javascript" src="./Cesium/streamerpaths.js"></script>
+    <!-- cesium热力图插件 -->
+    <script type="text/javascript" src="./lib/cesium/js/CesiumHeatmap.js"></script>
+  </body>
+</html>
