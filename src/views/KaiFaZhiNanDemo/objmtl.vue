@@ -79,7 +79,7 @@
          that.textureBump = await that.getTextureBump()
         new MTLLoader(that.manager)
           .setPath(
-            `${that.publicPath}models/male02/`
+            `${that.publicPath}static/model/male02/`
           )
           .load("male02_dds.mtl", function (materials) {
             console.log(materials)
@@ -87,7 +87,7 @@
             new OBJLoader(that.manager)
               .setMaterials(materials)
               .setPath(
-                `${that.publicPath}models/male02/`
+                `${that.publicPath}static/model/male02/`
               )
               .load(
                 "male02.obj",
@@ -131,7 +131,7 @@
       getTexture(){
         let that = this
         return new Promise((resolve,reject)=>{
-              new THREE.TextureLoader().load( `${that.publicPath}textures/brick_diffuse.jpg`,(texture)=>{
+              new THREE.TextureLoader().load( `${that.publicPath}static/brick_diffuse.jpg`,(texture)=>{
                          resolve(texture)
               },undefined,undefined );
         })
@@ -140,7 +140,7 @@
       getTextureBump(){
         let that = this
         return new Promise((resolve,reject)=>{
-              new THREE.TextureLoader().load( `${that.publicPath}textures/brick_bump.jpg`,(texture)=>{
+              new THREE.TextureLoader().load( `${that.publicPath}static/brick_bump.jpg`,(texture)=>{
                          resolve(texture)
               },undefined,undefined );
         })

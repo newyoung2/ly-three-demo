@@ -54,7 +54,7 @@
     watch: {},
     components: {},
     created() {
-      this.videoUrl = `${this.publicPath}textures/Big_Buck_Bunny_small.ogv`
+      this.videoUrl = `${this.publicPath}static/Big_Buck_Bunny_small.ogv`
     },
     mounted() {
       this.init();
@@ -74,7 +74,7 @@
         that.camera.position.z = 2000;
   
         //cubemap
-        const path = `${that.publicPath}textures/cube/SwedishRoyalCastle/`;
+        const path = `${that.publicPath}static/cube/SwedishRoyalCastle/`;
         const format = ".jpg";
         const urls = [
           path + "px" + format,

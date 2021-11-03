@@ -157,7 +157,7 @@
       getSpireModel(){
           let that = this
           new PLYLoader(that.manager).load(
-          `${that.publicPath}models1/ply/binary/Lucy100k.ply`,
+          `${that.publicPath}static/model/ply/binary/Lucy100k.ply`,
           function (geometry) {
             //   geometry.computeVertexNormals();
             
@@ -183,7 +183,7 @@
           let that = this
           // that.texture = await that.getTexture()
           new PLYLoader(that.manager).load(
-          `${that.publicPath}models1/ply/binary/Lucy100k.ply`,
+          `${that.publicPath}static/model/ply/binary/Lucy100k.ply`,
           function (geometry) {
             //   geometry.computeVertexNormals();
   
@@ -207,7 +207,7 @@
       },
       getTexture(){
         return new Promise((resolve,reject)=>{
-              new THREE.TextureLoader().load( `${that.publicPath}textures/carbon/Carbon_Normal.png`,(texture)=>{
+              new THREE.TextureLoader().load( `${that.publicPath}static/carbon/Carbon_Normal.png`,(texture)=>{
                          resolve(texture)
               },undefined,undefined );
         })

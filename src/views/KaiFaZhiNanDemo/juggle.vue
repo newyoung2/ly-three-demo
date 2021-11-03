@@ -63,7 +63,7 @@ export default {
 				// cubes
 
 				 that.cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				 that.cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/square-outline-textured.png' ) } );
+				 that.cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'static/square-outline-textured.png' ) } );
 
 				// grid
 
