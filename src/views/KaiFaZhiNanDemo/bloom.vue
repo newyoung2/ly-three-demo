@@ -103,7 +103,7 @@
         that.composer.addPass(bloomPass);
        
       /*   加载模型 */
-        new GLTFLoader().load("models1/gltf/PrimaryIonDrive.glb", function (
+        new GLTFLoader().load("static/model/PrimaryIonDrive.glb", function (
           gltf
         ) {
           const model = gltf.scene;

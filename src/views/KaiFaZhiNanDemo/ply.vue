@@ -52,6 +52,7 @@
       // this.gui.destroy();
     },
     methods: {
+      
       init() {
         let that = this;
         

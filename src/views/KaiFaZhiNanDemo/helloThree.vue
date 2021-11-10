@@ -42,7 +42,7 @@
 
         },
         created() {
-            this.videoUrl = `${window.location.protocol}//${window.location.host}/textures/Big_Buck_Bunny_small.ogv`
+            // this.videoUrl = `${window.location.protocol}//${window.location.host}/textures/Big_Buck_Bunny_small.ogv`
         },
         mounted() {
             this.init()
@@ -232,7 +232,7 @@
             },
             getTexture() {
                 return new Promise((resolve, reject) => {
-                    new THREE.TextureLoader().load(`${window.location.protocol}//${window.location.host}/textures/brick_diffuse.jpg`, (texture) => {
+                    new THREE.TextureLoader().load(`${window.location.protocol}//${window.location.host}/static/brick_diffuse.jpg`, (texture) => {
 
                         resolve(texture)
                     }, undefined, undefined);
