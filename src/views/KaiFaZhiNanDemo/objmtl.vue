@@ -76,6 +76,8 @@
         // comment in the following line and import TGALoader if your asset uses TGA textures
         // manager.addHandler( /\.tga$/i, new TGALoader() );
         that.texture = await that.getTexture()
+        that.texture.wrapS = THREE.RepeatWrapping;
+        that.texture.wrapT = THREE.RepeatWrapping;
          that.textureBump = await that.getTextureBump()
         new MTLLoader(that.manager)
           .setPath(
@@ -233,10 +235,11 @@
         if(that.knot){
           that.knot.rotation.y += 0.02
           console.log(that.knot)
-          if(that.knot.children[0].material.map.offset.y >= 0.5){
-            that.knot.children[0].material.map.offset.y = 0
-          }
-          that.knot.children[0].material.map.offset.y += 0.005
+          // if(that.knot.children[0].material.map.offset.y >= 0.5){
+          //   that.knot.children[0].material.map.offset.y = 0
+          // }
+          that.knot.children[0].material.map.offset.x -= 0.003
+          that.knot.children[0].material.map.offset.y += 0.003
           // that.knot.children.forEach(e=>{
           //     e.material.map.offset.y += 0.00005
           // })

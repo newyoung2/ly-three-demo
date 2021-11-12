@@ -66,6 +66,16 @@ const routes = [
         name: 'objmtl',
         component: () => import( '../views/KaiFaZhiNanDemo/objmtl.vue')
       },
+      {
+        path: 'solarSystem',
+        name: 'solarSystem',
+        component: () => import( '../views/solarSystem/solarSystem.vue')
+      },
+      {
+        path: 'lookRoom',
+        name: 'lookRoom',
+        component: () => import( '../views/smallDemo/lookRoom.vue')
+      },
     ]
   }
 ]
