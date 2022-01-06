@@ -12,6 +12,11 @@ const routes = [
     redirect:"/helloThree",
     children:[
       {
+        path: '/test',
+        name: 'test',
+        component: () => import( '../views/KaiFaZhiNanDemo/test.vue')
+      },
+      {
         path: '/helloThree',
         name: 'helloThree',
         component: () => import( '../views/KaiFaZhiNanDemo/helloThree.vue')
@@ -52,6 +57,11 @@ const routes = [
         component: () => import( '../views/KaiFaZhiNanDemo/juggle.vue')
       },
       {
+        path: '/outlinePass',
+        name: 'outlinePass',
+        component: () => import( '../views/KaiFaZhiNanDemo/outlinePass.vue')
+      },
+      {
         path: 'sea',
         name: 'sea',
         component: () => import( '../views/KaiFaZhiNanDemo/sea.vue')
@@ -75,6 +85,56 @@ const routes = [
         path: 'lookRoom',
         name: 'lookRoom',
         component: () => import( '../views/smallDemo/lookRoom.vue')
+      },
+      {
+        path: 'tubeFly',
+        name: 'tubeFly',
+        component: () => import( '../views/smallDemo/tubeFly.vue')
+      },
+      {
+        path: 'earth3D',
+        name: 'earth3D',
+        component: () => import( '../views/earth3D/earth3D.vue')
+      },
+      {
+        path: 'airportPoints',
+        name: 'airportPoints',
+        component: () => import( '../views/earth3D/airportPoints.vue')
+      },
+      {
+        path: 'colorPercent',
+        name: 'colorPercent',
+        component: () => import( '../views/earth3D/colorPercent.vue')
+      },
+      {
+        path: 'subwayLine',
+        name: 'subwayLine',
+        component: () => import( '../views/earth3D/subwayLine.vue')
+      },
+      {
+        path: 'planeEarth',
+        name: 'planeEarth',
+        component: () => import( '../views/earth3D/planeEarth.vue')
+      },
+      {
+        path: 'hotNews',
+        name: 'hotNews',
+        component: () => import( '../views/earth3D/hotNews.vue')
+      },
+      {
+        path: 'countryMesh',
+        name: 'countryMesh',
+        component: () => import( '../views/earth3D/countryMesh.vue')
+      },
+      {
+        path: 'countryMeshPoints',
+        name: 'countryMeshPoints',
+        component: () => import( '../views/earth3D/countryMeshPoints.vue')
+      },
+      {
+        path: 'countryMeshColorLerp',
+        name: 'countryMeshColorLerp',
+        component: () => import( '../views/earth3D/countryMeshColorLerp.vue')
       },
     ]
   }

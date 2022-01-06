@@ -1,57 +1,83 @@
 <template>
     <div id="container">
         <div class="toolBox" @mouseover="isMouseEnter =true" @mouseleave="isMouseEnter=false">
-            <div class="toolBox-item" v-for="(item,index) in meshOptionList1" :key="index" @click="clickImg(item,index)">
-                 <img :src="`${imgUrlPreix + item.text}.png`"  :class="{'activeImg':index == curIndex}" alt="">
-                 <span>{{item.text}}</span>
+            <div class="toolBox-item" v-for="(item,index) in meshOptionList1" :key="index"
+                @click="clickImg(item,index)">
+                <img :src="`${imgUrlPreix + item.text}.png`" :class="{'activeImg':index == curIndex}" alt="">
+                <span>{{item.text}}</span>
             </div>
         </div>
-        
-        <template  v-for="(item,index) in meshOptionList1">
-            <div class='labelDiv' :class="getClass(item)" v-show="index == curIndex" :key="index"  style="position: absolute;">
+
+        <template v-for="(item,index) in meshOptionList1">
+            <div class='labelDiv' :class="getClass(item)" v-show="index == curIndex" :key="index"
+                style="position: absolute;">
                 <img :src="`${imgUrlPreix1 + item.text}.png`" alt="" :key="index">
-           </div>
+            </div>
         </template>
-        
+
     </div>
 </template>
 
 <script>
     import * as THREE from 'THREE'
+    import Stats from "stats.js";
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
     import meshOptionList from './meshOptionList.js'
 
     let scene  //场景
     let camera   //相机
     let renderer  //渲染器
+    let container
     let ambientLight  //自然光
     let spotLight   //聚光
     let raycaster
     let mouse
+    let stats
 
     export default {
         data() {
             return {
-                curIndex:-1,
-                isMouseEnter:false,
+                curIndex: -1,
+                isMouseEnter: false,
                 imgUrlPreix: process.env.BASE_URL + 'static/solarSystem/UI/按钮/',
                 imgUrlPreix1: process.env.BASE_URL + 'static/solarSystem/UI/标签/',
-                meshOptionList1:JSON.parse(JSON.stringify(meshOptionList))
+                meshOptionList1: JSON.parse(JSON.stringify(meshOptionList))
 
             };
         },
         mounted() {
             this.init()
+
+            // 自适应 onresize 事件会在窗口被调整大小时发生
+            window.onresize = function () {
+                // 重置渲染器输出画布canvas尺寸
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                // 全屏情况下：设置观察范围长宽比aspect为窗口宽高比
+                camera.aspect = container.clientWidth / container.clientHeight;
+                // 渲染器执行render方法的时候会读取相机对象的投影矩阵属性projectionMatrix
+                // 但是不会每渲染一帧，就通过相机的属性计算投影矩阵(节约计算资源)
+                // 如果相机的一些属性发生了变化，需要执行updateProjectionMatrix ()方法更新相机的投影矩阵
+                camera.updateProjectionMatrix();
+            };
         },
         methods: {
             async init() {
                 let that = this
-                let container = document.getElementById('container');
 
-                // 创建场景
+                /* 性能监控 */
+                //创建stats对象
+                 stats = new Stats();
+                 stats.domElement.style.left = '467px';
+                 //Stats.domElement:web页面上输出计算结果,一个div元素
+                 document.body.appendChild(stats.domElement);
+
+
+                container = document.getElementById('container');
+
+                /*  创建场景 */
                 scene = new THREE.Scene();
 
-                // 创建相机
+                /* 创建相机 */
                 camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 10000);  //透视投影相机
                 /*   //正投影相机
                 var width = window.innerWidth; //窗口宽度
@@ -63,15 +89,17 @@
                 // 注意相机参数6远裁界面可以包含全部星体在内
                 camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1500);*/
                 camera.position.set(400, 400, 400)
-                camera.lookAt(scene.position)
+               
 
 
-                //创建渲染器
+                /* 创建渲染器 */
                 renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setClearColor('black');
+                // renderer.setPixelRatio(window.devicePixelRatio)  // 设置设备像素比( 本质原理：修正canvas画布尺寸 )
                 renderer.setSize(container.clientWidth, container.clientHeight);
                 renderer.shadowMapEnabled = true;
-
+                
+                /* 添加光源 */
                 // 创建环境光
                 ambientLight = new THREE.AmbientLight(new THREE.Color("#666666"));
                 scene.add(ambientLight);
@@ -82,11 +110,11 @@
                 spotLight.castShadow = true;
                 scene.add(spotLight);
 
-                // 添加坐标轴
+                /*  添加坐标轴 */
                 // var axes = new THREE.AxisHelper(500);
                 // scene.add(axes);
 
-                // 创建网格模型
+                /* 创建网格模型 */
                 meshOptionList.forEach(e => {
                     var group = new THREE.Group();
                     let geometryOption = e.geometryOption  //太阳几何体配置
@@ -125,27 +153,29 @@
                     }
                 })
 
-                
 
-                container.appendChild(renderer.domElement);
-                new OrbitControls(camera, renderer.domElement);
-
-                 // 拾取模型事件
+               /*  拾取模型事件 */
                 raycaster = new THREE.Raycaster();
                 mouse = new THREE.Vector2();
                 window.addEventListener('click', this.onDocumentMouseDown, false);
 
+                /* 开始循环渲染 */
+                container.appendChild(renderer.domElement);
+                new OrbitControls(camera, renderer.domElement);
+                camera.lookAt(scene.position)
                 this.renders()
 
+
+
             },
-            getClass(item){
+            getClass(item) {
                 let obj = {}
-                this.meshOptionList1.map(e=>{
-                    obj[e.name] = item.name == e.name?true:false
+                this.meshOptionList1.map(e => {
+                    obj[e.name] = item.name == e.name ? true : false
                 })
                 return obj
             },
-            clickImg(item,index){
+            clickImg(item, index) {
                 this.curIndex = index
 
             },
@@ -154,19 +184,19 @@
                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
                 raycaster.setFromCamera(mouse, camera);
                 // 环行星是group包含两个mesh子对象，intersectObjects方法第二个参数设置为true，可以检测子对象
-                const intersects = raycaster.intersectObjects(scene.children,true);
-                
+                const intersects = raycaster.intersectObjects(scene.children, true);
+
                 if (intersects.length > 0 && !this.isMouseEnter) {
-                    intersects.forEach(e=>{
-                        if(e.object.data){
+                    intersects.forEach(e => {
+                        if (e.object.data) {
                             this.curIndex = e.object.data.index
                         }
                     })
-                }else if (intersects.length == 0 && !this.isMouseEnter) {
+                } else if (intersects.length == 0 && !this.isMouseEnter) {
                     this.curIndex = -1
                 }
             },
-           
+
             //生成球模型
             addSphere(sphereOption, materialOption, data) {
                 var geometry = new THREE.SphereGeometry(...sphereOption);
@@ -291,6 +321,7 @@
             },
             renders() {
                 let that = this
+                stats.update();
                 scene.traverse(function (e) {
 
                     if (e instanceof THREE.Group && e.name == '太阳') {
@@ -298,13 +329,13 @@
                         e.children[0].material.map.offset.x -= 0.003;
                         e.children[0].material.map.offset.y += 0.003;
 
-                       
-                        if(document.querySelectorAll('.' + e.data.name) && document.querySelectorAll('.' + e.data.name)[0]){
+
+                        if (document.querySelectorAll('.' + e.data.name) && document.querySelectorAll('.' + e.data.name)[0]) {
                             let position = that.coordinateExchange(e)
                             document.querySelectorAll('.' + e.data.name)[0].style.left = position[0] + 'px';
                             document.querySelectorAll('.' + e.data.name)[0].style.top = position[1] - 300 + 'px';
                         }
-                        
+
                     }
 
                     if (e instanceof THREE.Group && e.name != '太阳') {
@@ -313,8 +344,8 @@
                         var z = e.data.otherOption.radius * Math.cos(e.data.otherOption.angle);//地球z坐标计算
                         e.position.set(x, 0, z);
                         e.rotation.y += e.data.otherOption.speed;
-                        
-                        if(document.querySelectorAll('.' + e.data.name) && document.querySelectorAll('.' + e.data.name)[0]){
+
+                        if (document.querySelectorAll('.' + e.data.name) && document.querySelectorAll('.' + e.data.name)[0]) {
                             let position = that.coordinateExchange(e)
                             document.querySelectorAll('.' + e.data.name)[0].style.left = position[0] + 'px';
                             document.querySelectorAll('.' + e.data.name)[0].style.top = position[1] - 300 + 'px';
@@ -322,7 +353,7 @@
                     }
 
                 });
-
+               
                 requestAnimationFrame(this.renders);
                 renderer.render(scene, camera);
             }
@@ -347,7 +378,7 @@
         left: 30%;
     }
 
-    .toolBox-item{
+    .toolBox-item {
         position: relative;
         width: 50px;
         height: 80px;
@@ -360,14 +391,12 @@
         color: white;
     }
 
-    .toolBox-item img{
+    .toolBox-item img {
         width: 50px;
         height: 50px;
     }
 
-    .activeImg{
+    .activeImg {
         transform: scale(1.2);
     }
-
-    
 </style>

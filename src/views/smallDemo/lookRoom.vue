@@ -1,6 +1,6 @@
 <template>
     <div id="container">
-        
+
     </div>
 </template>
 
@@ -15,12 +15,13 @@
     let spotLight   //聚光
     let raycaster
     let mouse
+    let controls
 
     export default {
         data() {
             return {
-                curIndex:-1,
-                isMouseEnter:false,
+                curIndex: -1,
+                isMouseEnter: false,
                 imgUrlPreix: process.env.BASE_URL + 'static/solarSystem/UI/按钮/',
                 imgUrlPreix1: process.env.BASE_URL + 'static/solarSystem/UI/标签/',
 
@@ -39,8 +40,8 @@
 
                 // 创建相机
                 camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 10000);  //透视投影相机
-                camera.position.set(-150,0,0)
-                
+                camera.position.set(-150, 0, 0)
+
 
                 //创建渲染器
                 renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -65,17 +66,22 @@
                 // 创建网格模型
                 let sphereOption = [200, 32, 32]
                 let texture = new THREE.TextureLoader().load(`${process.env.BASE_URL}static/solarSystem/全景图.jpg`)
-                    texture.wrapS = THREE.RepeatWrapping;
-                    texture.wrapT = THREE.RepeatWrapping;
-                    let materialOption = { map: texture, side: THREE.DoubleSide }
-                    let mesh = this.addSphere(sphereOption, materialOption)
-                    scene.add(mesh)
-                    
-                
-                container.appendChild(renderer.domElement);
-                new OrbitControls(camera, renderer.domElement);
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                let materialOption = { map: texture, side: THREE.DoubleSide }
+                let mesh = this.addSphere(sphereOption, materialOption)
+                scene.add(mesh)
 
-               
+
+                container.appendChild(renderer.domElement);
+                controls = new OrbitControls(camera, renderer.domElement);
+                //透视投影相机：相机距离目标观察点距离越远显示越小，距离越近显示越大
+                //相机距离观察目标点极小距离——模型最大状态
+                controls.minDistance = 0;
+                //相机距离观察目标点极大距离——模型最小状态
+                controls.maxDistance = 150;
+
+
                 this.renders()
 
             },
@@ -85,7 +91,7 @@
                 var material = new THREE.MeshBasicMaterial(materialOption);
                 var sphere = new THREE.Mesh(geometry, material);
                 // sphere.position.set(...data.position)
-                
+
                 return sphere
             },
             renders() {
@@ -121,7 +127,7 @@
         left: 30%;
     }
 
-    .toolBox-item{
+    .toolBox-item {
         position: relative;
         width: 50px;
         height: 80px;
@@ -134,14 +140,12 @@
         color: white;
     }
 
-    .toolBox-item img{
+    .toolBox-item img {
         width: 50px;
         height: 50px;
     }
 
-    .activeImg{
+    .activeImg {
         transform: scale(1.2);
     }
-
-    
 </style>

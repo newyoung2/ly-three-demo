@@ -3,11 +3,26 @@ const menu = [
     title: "【实战与应用】", children: [
       { name: '太阳系案例', value: 'solarSystem'},
       { name: '全景浏览房屋', value: 'lookRoom'},
+      { name: '管道漫游', value: 'tubeFly'},
+    ]
+  },
+  {
+    title: "【地球web3D可视化】", children: [
+      { name: '平面地图', value: 'planeEarth'},
+      { name: '3D地球', value: 'earth3D'},
+      { name: '全球机场分布可视化', value: 'airportPoints'},
+      { name: '密集点可视化（颜色插值）', value: 'colorPercent'},
+      { name: '铁路线数据可视化', value: 'subwayLine'},
+      { name: '全球热点（光柱、波动光圈）', value: 'hotNews'},
+      { name: '国家多边形Mesh(点阵)', value: 'countryMeshPoints'},
+      { name: '国家多边形Mesh(点击高亮)', value: 'countryMesh'},
+      { name: '国家多边形Mesh(不同颜色)', value: 'countryMeshColorLerp'},
     ]
   },
   {
     title: "【three开发指南】学习示例",
     children: [  
+      { name: 'test', value: 'test'},
       { name: '添加立方体', value: 'helloThree'},
       { name: '平面光', value: 'areaLight'},
       { name: '凸面体', value: 'convex'},
@@ -19,6 +34,7 @@ const menu = [
       { name: '搭积木', value: 'juggle'},
       { name: '海洋', value: 'sea'},
       { name: '后期bloom', value: 'bloom'},
+      { name: '后期outlinePass', value: 'outlinePass'},
     ]
   },
   {
@@ -31,7 +47,9 @@ const menu = [
   },
   {
     title: "【专题学习】相机Camera相关",
-    children: []
+    children: [
+      // { name: '相机漫游', value: 'cameraFly'},
+    ]
   },
   {
     title: "【专题学习】材质Material和渲染效果",
