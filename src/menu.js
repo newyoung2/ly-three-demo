@@ -8,15 +8,18 @@ const menu = [
   },
   {
     title: "【地球web3D可视化】", children: [
+      { name: '全球热点（光柱、波动光圈）', value: 'hotNews'},
+      { name: '世界人口密度可视化', value: 'population'},
+      { name: '飞行轨迹线', value: 'flyLine'},
+      { name: '全球机场分布可视化', value: 'airportPoints'},
       { name: '平面地图', value: 'planeEarth'},
       { name: '3D地球', value: 'earth3D'},
-      { name: '全球机场分布可视化', value: 'airportPoints'},
       { name: '密集点可视化（颜色插值）', value: 'colorPercent'},
       { name: '铁路线数据可视化', value: 'subwayLine'},
-      { name: '全球热点（光柱、波动光圈）', value: 'hotNews'},
       { name: '国家多边形Mesh(点阵)', value: 'countryMeshPoints'},
       { name: '国家多边形Mesh(点击高亮)', value: 'countryMesh'},
       { name: '国家多边形Mesh(不同颜色)', value: 'countryMeshColorLerp'},
+      
     ]
   },
   {

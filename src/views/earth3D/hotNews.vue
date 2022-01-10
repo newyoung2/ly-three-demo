@@ -46,7 +46,7 @@
 
                 // 创建相机
                 camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 10000);  //透视投影相机
-                camera.position.set(0, 0, 250)
+                camera.position.set(11,88, -223)
 
 
                 //创建渲染器
@@ -333,22 +333,7 @@
                         // mapGroup.rotation.y += 0.003;
                     }
                 });
-                
-                // 所有波动光圈都有自己的透明度和大小状态
-                // 一个波动光圈透明度变化过程是：0~1~0反复循环
-                // if (WaveMeshArr.length) {
-                //     WaveMeshArr.forEach(function (mesh) {
-                //         mesh._s += 0.007;
-                //         mesh.scale.set(mesh.size * mesh._s, mesh.size * mesh._s, mesh.size * mesh._s);
-                //         if (mesh._s <= 1.5) {
-                //             mesh.material.opacity = (mesh._s - 1) * 2;//2等于1/(1.5-1.0)，保证透明度在0~1之间变化
-                //         } else if (mesh._s > 1.5 && mesh._s <= 2) {
-                //             mesh.material.opacity = 1 - (mesh._s - 1.5) * 2;//2等于1/(2.0-1.5) mesh缩放2倍对应0 缩放1.5被对应1
-                //         } else {
-                //             mesh._s = 1.0;
-                //         }
-                //     })
-                // }
+               
                 mapGroup.rotation.y += 0.003;
                 markGroup.rotation.y += 0.003;
                 requestAnimationFrame(this.renders);

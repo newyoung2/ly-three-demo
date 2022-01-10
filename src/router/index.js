@@ -136,6 +136,16 @@ const routes = [
         name: 'countryMeshColorLerp',
         component: () => import( '../views/earth3D/countryMeshColorLerp.vue')
       },
+      {
+        path: 'population',
+        name: 'population',
+        component: () => import( '../views/earth3D/population.vue')
+      },
+      {
+        path: 'flyLine',
+        name: 'flyLine',
+        component: () => import( '../views/earth3D/flyLine.vue')
+      },
     ]
   }
 ]
