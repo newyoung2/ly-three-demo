@@ -237,7 +237,7 @@
                 newGeometry.computeVertexNormals();//如果使用受光照影响材质，需要计算生成法线
                 var mesh = new THREE.Mesh(newGeometry, material)
                 mesh.name = origData.properties.name
-                let group = new Group()
+                let group = new THREE.Group()
                 group.add(mesh)
                 return group
             },
