@@ -146,6 +146,11 @@ const routes = [
         name: 'flyLine',
         component: () => import( '../views/earth3D/flyLine.vue')
       },
+      {
+        path: 'IOT',
+        name: 'IOT',
+        component: () => import( '../views/smallDemo/IOT.vue')
+      },
     ]
   }
 ]

@@ -9,9 +9,10 @@ module.exports = {
   // 基本路径
   publicPath: "./",
   // 输出文件目录
-  outputDir: "cesium",
+  outputDir: "threedemo",
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
+  productionSourceMap: false,
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === "darwin",

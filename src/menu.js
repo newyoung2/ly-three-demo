@@ -4,6 +4,7 @@ const menu = [
       { name: '太阳系案例', value: 'solarSystem'},
       { name: '全景浏览房屋', value: 'lookRoom'},
       { name: '管道漫游', value: 'tubeFly'},
+      { name: '物联网3D可视化', value: 'IOT'},
     ]
   },
   {
