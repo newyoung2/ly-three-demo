@@ -16,7 +16,7 @@
     var chooseMesh = null
     var granaryArr = [];//所有粮仓模型对象的集合，export导出用于射线拾取
     let labelRenderer = null
-    let fireMesh 
+    let fireMesh
 
     export default {
         data() {
@@ -41,7 +41,16 @@
                 camera.updateProjectionMatrix();
             };
         },
+
+        beforeRouteLeave(to, from, next) {
+            // 导航离开该组件的对应路由时调用
+            
+            this.clearScene()
+            next()    //允许跳转页面
+        },
+
         methods: {
+            
             async init() {
                 let that = this
                 let container = document.getElementById('container');
@@ -210,7 +219,7 @@
                     chooseMesh.material.color.set(0xffffff);
                 }
 
-                if(fireMesh){
+                if (fireMesh) {
                     fireMesh.remove(fireMesh.getObjectByName('fireMesh'))
                     scene.remove(fireMesh);
                 }
@@ -242,18 +251,43 @@
             },
             renders() {
                 let that = this
-                // console.log(camera.position)
-                labelRenderer.render(scene, camera);
+                labelRenderer? labelRenderer.render(scene, camera):''
                 requestAnimationFrame(this.renders);
-                renderer.render(scene, camera);
-            }
+                renderer?renderer.render(scene, camera):''
+            },
+            // 销毁对象释放内存
+            clearScene() {
+                window.removeEventListener('click', this.onDocumentMouseDown, false);
+                cancelAnimationFrame(this.renders);
+                scene.traverse((child) => {
+                    if (child.material) {
+                        child.material.dispose();
+                    }
+                    if (child.geometry) {
+                        child.geometry.dispose();
+                    }
+                    child = null;
+                });
+                renderer.forceContextLoss();
+                renderer.dispose();
+                scene.clear();
+                scene = null;
+                camera = null;
+                controls = null;
+                renderer.domElement = null;
+                renderer = null;
+                labelRenderer.domElement.innerHTML = ''
+                labelRenderer = null
+                
+                console.log('clearScene');
+            },
 
         },
     };
 
 </script>
 
-<style >
+<style>
     .labelstyle {
         height: 20px;
         background: rgba(0, 0, 0, 0.3);
@@ -273,16 +307,16 @@
     }
 
     .tag {
-      /* border:solid #009999 1px; */
-      background: linear-gradient(#00ffff, #00ffff) left top,
-        linear-gradient(#00ffff, #00ffff) left top,
-        linear-gradient(#00ffff, #00ffff) right bottom,
-        linear-gradient(#00ffff, #00ffff) right bottom;
-      background-repeat: no-repeat;
-      background-size: 1px 6px, 6px 1px;
-      background-color: rgba(0, 0, 0, 0.4);
-      color: #ffffff;
-      font-size:18px;
-      padding:8px 12px;     
+        /* border:solid #009999 1px; */
+        background: linear-gradient(#00ffff, #00ffff) left top,
+            linear-gradient(#00ffff, #00ffff) left top,
+            linear-gradient(#00ffff, #00ffff) right bottom,
+            linear-gradient(#00ffff, #00ffff) right bottom;
+        background-repeat: no-repeat;
+        background-size: 1px 6px, 6px 1px;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #ffffff;
+        font-size: 18px;
+        padding: 8px 12px;
     }
 </style>

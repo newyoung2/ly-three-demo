@@ -12,6 +12,11 @@ const routes = [
     redirect:"/helloThree",
     children:[
       {
+        path: '/testDemo',
+        name: 'testDemo',
+        component: () => import( '../views/testDemo.vue')
+      },
+      {
         path: '/test',
         name: 'test',
         component: () => import( '../views/KaiFaZhiNanDemo/test.vue')
@@ -150,6 +155,21 @@ const routes = [
         path: 'IOT',
         name: 'IOT',
         component: () => import( '../views/smallDemo/IOT.vue')
+      },
+      {
+        path: 'phoneDisplay',
+        name: 'phoneDisplay',
+        component: () => import( '../views/smallDemo/phoneDisplay.vue')
+      },
+      {
+        path: 'basicCityModel',
+        name: 'basicCityModel',
+        component: () => import( '../views/wisdomCity/basicCityModel.vue')
+      },
+      {
+        path: 'customShape',
+        name: 'customShape',
+        component: () => import( '../views/wisdomCity/customShape.vue')
       },
     ]
   }

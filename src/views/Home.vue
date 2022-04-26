@@ -42,7 +42,7 @@
                 <el-button
                   size="small"
                   type="danger"
-                  plain
+                  
                   @click="$router.push(item1.value)"
                 >{{item1.name}}</el-button>
               </div>
