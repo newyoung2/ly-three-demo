@@ -1,4 +1,4 @@
-# cesium-demo
+# ly-three-demo
 
 ## Project setup
 ```
@@ -18,4 +18,9 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### 里面模型文件都放在了本地tomcat服务器里了
+threejs学习案例
+1、3d地球
+2、智慧城市
+3、粮仓
+4、若干小demo
+
